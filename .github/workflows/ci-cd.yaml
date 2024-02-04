@@ -4,10 +4,11 @@ on:
     branches: main
   pull_request:
     branches: main
+
 jobs:
   lint:
-      runs-on: ubuntu-latest
-      steps:
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         name: Cache NPM Dependencies
@@ -16,21 +17,27 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
       - run: npm ci
+      - name: Install Additional Dependencies
+        run: npm install
       - name: Lint Website
         run: npx eslint --fix 'src/**/*.js'
+
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      name: Cache NPM Dependencies
-      with:
-        node-version: 16.15.0
-        cache: 'npm'
-        cache-dependency-path: package-lock.json
-    - run: npm ci
-    - name: Test Website
-      run: npm test
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        name: Cache NPM Dependencies
+        with:
+          node-version: 16.15.0
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - name: Install Additional Dependencies
+        run: npm install
+      - name: Test Website
+        run: npm test
+
   staging:
     runs-on: ubuntu-latest
     steps:
@@ -42,6 +49,8 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
       - run: npm ci
+      - name: Install Additional Dependencies
+        run: npm install
       - name: Build site
         run: npm run build
       - name: Deploy
@@ -51,6 +60,7 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
   deploy:
     needs: [test, lint, staging]
     if: github.event_name == 'push'
@@ -64,6 +74,8 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
       - run: npm ci
+      - name: Install Additional Dependencies
+        run: npm install
       - name: Build site
         run: npm run build
       - name: Deploy
