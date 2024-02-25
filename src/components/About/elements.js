@@ -8,7 +8,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import React from "react";
-import { Download, GitHub, Linkedin } from "react-feather";
+import { GitHub, Linkedin } from "react-feather";
 import Headshot from "./headshot.jpg";
 import "../CSS/loading.css";
 /**
@@ -147,7 +147,7 @@ const socials = () => {
           </HStack>
         </Link>
 
-        {/* New Download CV Button */}
+        {/*  
         <Link
           py={2}
           px={4}
@@ -162,6 +162,7 @@ const socials = () => {
             <Box as={Download} /> <Text>Download CV</Text>
           </HStack>
         </Link>
+        */}
       </HStack>
     </Box>
   );

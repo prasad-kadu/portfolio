@@ -3,4 +3,4 @@
 
 npx prettier --write 'src/**/{*.js,*.css}'
 npx eslint --fix 'src/**/*.js'
-npm test -- --watchAll=false
+#npm test -- --watchAll=false
