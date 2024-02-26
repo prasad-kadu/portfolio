@@ -146,23 +146,6 @@ const socials = () => {
             <Box as={Linkedin} /> <Text>LinkedIn</Text>
           </HStack>
         </Link>
-
-        {/*  
-        <Link
-          py={2}
-          px={4}
-          href="https://drive.google.com/uc?export=download&id=11-wuk3USvq2BBjTCaLg95zA7VuGPmjFl"
-          download
-          rounded="sm"
-          bg="#4a4a4a" // Change the color as per your preference
-          color="#fff"
-          fontWeight="bold"
-        >
-          <HStack spacing={2} alignItems="center">
-            <Box as={Download} /> <Text>Download CV</Text>
-          </HStack>
-        </Link>
-        */}
       </HStack>
     </Box>
   );
